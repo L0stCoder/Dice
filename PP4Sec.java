@@ -11,6 +11,7 @@ public class PP4Sec
  *============================ ============================ ============================ ============================ */	
 
 	public int roll()
+		//This is my second comment
 	{
 		for(int test=1; test<check; test++){
 			numD1 = (int) ((Math.random() * faces)+1);
