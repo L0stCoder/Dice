@@ -1,0 +1,59 @@
+/**
+ * @(#)PP5.java
+ *
+ *
+ * @author 
+ * @version 1.00 2018/12/10
+ */
+
+import java.util.Scanner;
+public class PP5{
+    public static void main(String[]args){
+    	Scanner input=new Scanner(System.in);
+    	int Player1S=0, Player2S=0; //Starts score off at zero points
+    	int Player1RS=0, Player2RS=0; //Adds up total points in the round
+    	final int FINAL=100;
+    	int die1, die2; //Starts the Dice off
+    	String Turn="P1"; //Starts while game on Player 1's turn each game
+    	String Roll="y"; //Starts off the player as rolling unless told otherwise
+    	String test="y";
+    	System.out.println("Welcome to the game of PIG!");
+    	while(Player1S<=FINAL||Player2S<=FINAL){
+   			if(Turn.equalsIgnoreCase("P1")){
+   				Player1RS=0;
+   				System.out.println("It is currently Player 1's turn");
+   				System.out.println("Player 1's total score is: "+Player1S);
+   				System.out.print("Would you like to roll? [y, n]: ");
+    			Roll=input.nextLine();
+   				while(test.equalsIgnoreCase("y")){
+    				if(Roll.equalsIgnoreCase("y")){
+    					die1=(int)((Math.random()*6)+1);
+    					die2=(int)((Math.random()*6)+1);
+    					System.out.println("Player 1 rolled a "+die1+" on dice 1 and a "+die2+" on dice 2");
+    					if(die1==1||die2==1){
+    						Player1RS=0;
+    						if(die1==1&&die2==1){
+    							Player1S=0;
+    						}
+    						Turn="P2";
+    					}
+    					else{
+    						Player1RS=Player1RS+(die1+die2);
+    						System.out.println("Player 1's total score this round is: "+Player1RS);
+    						System.out.print("Would you like to roll again and be a PIG? [y, n]: ");
+    						Roll=input.nextLine();
+    					}
+    				}
+    				else{
+    					System.out.println("Player 1's turn has been skipped!");
+    				}
+    				System.out.println("\n");
+   				}
+   				Player1S=Player1S+Player1RS;
+   				Turn="P2";
+    		}
+    		else if(Turn.equalsIgnoreCase("P2")){
+    		}
+    	}
+    }
+}
