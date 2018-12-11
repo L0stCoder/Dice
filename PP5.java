@@ -41,7 +41,7 @@ public class PP5{
     						Player1RS=Player1RS+(die1+die2);
     						System.out.println("Player 1's total score this round is: "+Player1RS);
     						System.out.print("Would you like to roll again and be a PIG? [y, n]: ");
-    						Roll=input.nextLine();
+    						test=input.nextLine();
     					}
     				}
     				else{
