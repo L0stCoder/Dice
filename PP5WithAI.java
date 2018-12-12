@@ -7,7 +7,7 @@
  */
 
 import java.util.Scanner;
-public class PP5{
+public class PP5WithAI{
     public static void main(String[]args){
     	Scanner input=new Scanner(System.in);
     	int x=1, y=1;
@@ -21,7 +21,7 @@ public class PP5{
     	String playAgain="y";
     	//AI VARIBLES
     	final int AIMAXPOINTS=20;
-    	int AIS=0, AIRS=0, AITest=1;
+    	int AIS=0, AIRS=0;
     	System.out.println("Welcome to the game of PIG!");
     	System.out.print("How many players are there? [1, 2]: ");
     	playerCount=input.nextInt();
@@ -58,11 +58,11 @@ public class PP5{
     						else{
     							System.out.println("Player 1's turn has been skipped!");
     							y=0;
+    							Turn="P2";
     						}
     						System.out.println("\n----------------------------------------\n");
    						}
    						Player1S=Player1S+Player1RS;
-   						Turn="P2";
     				}
     				else if(Turn.equalsIgnoreCase("P2")){
     					Player1RS=0;
@@ -83,25 +83,28 @@ public class PP5{
     									Player2S=0;
     								}
     								y=0;
+    								Turn="P1";
     							}
     							else{
     								Player2RS=Player2RS+(die1+die2);
     								System.out.println("Player 2's total score this round is: "+Player2RS);
     								System.out.print("Would you like to roll again and be a PIG? [y, n]: ");
+    								input.nextLine();
     								Roll=input.nextLine();
     							}
     						}
     						else{
     							System.out.println("Player 2's turn has been skipped!");
     							y=0;
+    							Turn="P1";
     						}
     						System.out.println("\n----------------------------------------\n");
    						}
    						Player2S=Player2S+Player2RS;
-   						Turn="P1";
     				}
     			}
     			System.out.print("Would you like to play again? [y, n]: ");
+    			input.nextLine();
     			playAgain=input.nextLine();
     		}
     		else if(playerCount==1){
@@ -130,6 +133,7 @@ public class PP5{
     								Player1RS=Player1RS+(die1+die2);
     								System.out.println("Player 1's total score this round is: "+Player1RS);
     								System.out.print("Would you like to roll again and be a PIG? [y, n]: ");
+    								input.nextLine();
     								Roll=input.nextLine();
     							}
     						}
@@ -150,22 +154,26 @@ public class PP5{
     					y=1;
     					while(x==y){
     						int AIRolls=(int)(Math.random()*5);
-    						if(AITest<=AIRolls){
-    							die1=(int)((Math.random()*6)+1);
-    							die2=(int)((Math.random()*6)+1);
-    							System.out.println("The COMPUTER rolled a "+die1+" on dice 1 and a "+die2+" on dice 2");
-    							if(die1==1||die2==1){
-    								AIRS=0;
-    								if(die1==1&&die2==1){
-    									AIS=0;
+    						if(AIRolls>=1){
+    							for(int AITest=1; AITest<=AIRolls; AITest++){
+    								die1=(int)((Math.random()*6)+1);
+    								die2=(int)((Math.random()*6)+1);
+    								System.out.println("The COMPUTER rolled a "+die1+" on dice 1 and a "+die2+" on dice 2");
+    								if(die1==1||die2==1){
+    									AIRS=0;
+    									if(die1==1&&die2==1){
+    										AIS=0;
+    									}
+    									y=0;
     								}
-    								y=0;
-    								AITest++;
-    							}
-    							else{
-    								AIRS=AIRS+(die1+die2);
-    								System.out.println("COMPUTER'S total score this round is: "+AIRS);
-    								Roll=input.nextLine();
+    								else{
+    									AIRS=AIRS+(die1+die2);
+    									System.out.println("COMPUTER'S total score this round is: "+AIRS);
+    								}
+    								if(AIRS>=20){
+    									System.out.println("COMPUTER has hit the maximum points this round!");
+    									Turn="P1";
+    								}
     							}
     						}
     						else{
@@ -179,6 +187,7 @@ public class PP5{
     				}
     			}
     			System.out.print("Would you like to play again? [y, n]: ");
+    			input.nextLine();
     			playAgain=input.nextLine();
     		}
     		else{
