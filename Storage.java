@@ -12,7 +12,7 @@ public class SinglePlayer{
     public static void main(String[]args){
     	Scanner input=new Scanner(System.in);
     	int x=1, y=1;
-    	int pCount, aiScore=0, aiTurn=0, turnPoint=0, die1=0, die2=0, thisPoint=0, userTurn=0; //AI ints
+    	int pCount, aiScore=0, aiTurn=0, turnPoint=0, die1=0, die2=0, thisPoint=0, userTurn=0, begin =0; //AI ints
     	int Player1S=0, Player2S=0; //Starts score off at zero points
     	int Player1RS=0, Player2RS=0; //Adds up total points in the round
     	final int FINAL=100;
@@ -68,55 +68,57 @@ public class SinglePlayer{
     			//user turn
     			while (userTurn==1){
     				Player1RS=0;
-   				System.out.println("It is currently your turn");
-   				System.out.println("Your total score is: "+Player1S);
-   				System.out.print("Would you like to roll? [y, n]: \n");
-   				input.nextLine();
-    			Roll=input.nextLine();
-    			System.out.println("\n----------------------------------------\n");
-    			y=1;
+   					System.out.println("It is currently your turn");
+   					System.out.println("Your total score is: "+Player1S);
+   					System.out.print("Would you like to roll? [1 for yes, 2 for no]: \n");
+   				
+    				begin=input.nextInt();
+    				System.out.println("\n----------------------------------------\n");
+    				y=1;
     			while(x==y){
-    				if(Roll.equalsIgnoreCase("y")){
+    				if(begin ==1){
     					die1=(int)((Math.random()*6)+1);
     					die2=(int)((Math.random()*6)+1);
     					System.out.println("You rolled a "+die1+" and a "+die2);
     					if(die1==1||die2==1){
-    						if(die1==1&&die2==1){
-    							System.out.println("You rolled two zeros, your entire score has reset and you loose your turn.");
+    						if(die1==die2){
+    							System.out.println("You rolled two 1's, your entire score has reset and you loose your turn.");
     						Player1S=0;
-    						y=0;
+    						begin=0;
     						userTurn=0;
     						}
     						else {
-    							System.out.println("You rolled a zero. Your score this round has been reset, and  your turn ends.");
+    							System.out.println("You rolled a 1. Your score this round has been reset, and  your turn ends.");
     							Player1RS=0;
-    							y=0;
+    							begin=0;
     							userTurn=0;
     						}
-    						
     						y=0;
+    						begin=0;
     					}
     					else if (die1 != 1 || die2 !=1){
     						Player1RS=Player1RS+(die1+die2);
     						System.out.println("Your total score this round is: "+Player1RS);
-    						System.out.print("Would you like to roll again and be a PIG? [y, n]: ");
-    						input.nextLine();
-    						Roll=input.nextLine();
+    						System.out.print("Would you like to roll again and be a PIG? [1 for yes, 2 for no]: ");
+    						begin = input.nextInt();
+    						
+
     					}
     				}
     				else {
     					System.out.println("Your turn ends.");
     					y=0;
+    					userTurn=0;
+    					Player1S=Player1S+Player1RS;
     				}
     				}
     				System.out.println("\n----------------------------------------\n");
    				}
-   				Player1S=Player1S+Player1RS;
-   				userTurn=0;
+   			
    				
-    				}
     			}
     		}
-   		}
+    	}
+   	}
 
     		//END OF AI GAME
